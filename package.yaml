@@ -73,5 +73,9 @@ library:
     - base >= 4.15 && < 5
     - invariant >= 0.5
   exposed-modules:
-    - Data.IsoVariant
-  other-modules: []
+    - Data.TypeRig.Invariant
+    - Data.TypeRig.Summish
+    - Data.TypeRig.Productish
+    - Data.TypeRig.Riggish
+    - Data.TypeRig
+other-modules: []

@@ -78,4 +78,4 @@ library:
     - Data.TypeRig.Productish
     - Data.TypeRig.Riggish
     - Data.TypeRig
-other-modules: []
+  other-modules: []

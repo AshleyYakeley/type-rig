@@ -3,11 +3,21 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    name: invariant
+    version: 0.5.6
+    git: https://github.com/AshleyYakeley/invariant-functors.git
+    pantry-tree:
+      size: 882
+      sha256: e32de0562bf026ab145950d740d1ce20d490dffe2f6abc7cde5fc101e34f45db
+    commit: 1c84bd5fbd320fb62b996710be58a458aec88d0b
+  original:
+    git: https://github.com/AshleyYakeley/invariant-functors.git
+    commit: 1c84bd5fbd320fb62b996710be58a458aec88d0b
 snapshots:
 - completed:
-    size: 618876
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/6.yaml
-    sha256: fb634b19f31da06684bb07ce02a20c75a3162138f279b388905b03ebd57bb50f
-  original:
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/6.yaml
+    size: 619093
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/5.yaml
+    sha256: b936d27d647a31a8834d3efec126e2a07dee9c9bd6dd401d9bdac77e7b278f1e
+  original: lts-19.5

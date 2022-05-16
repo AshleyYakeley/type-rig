@@ -23,9 +23,6 @@ class Invariant f => Summish f where
     default (<+++>) :: Alternative f => f a -> f b -> f (Either a b)
     fa <+++> fb = (fmap Left fa) <|> (fmap Right fb)
 
-pSumLeft :: Summish f => f a -> f a -> f a
-pSumLeft fa fb = invmap (either id id) Left $ fa <+++> fb
-
 instance Summish Endo where
     pNone = Endo id
     Endo p <+++> Endo q =

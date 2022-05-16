@@ -5,7 +5,6 @@ import Control.Arrow
 import Control.Category
 import Data.Kind
 import Data.Semigroup
-import Data.Tuple
 import Data.TypeRig.Invariant
 import Prelude hiding ((.), id)
 import qualified Text.ParserCombinators.ReadPrec as ReadPrec
@@ -24,9 +23,6 @@ class Invariant f => Productish f where
     fu ***> fa = invmap (\((), a) -> a) (\a -> ((), a)) $ fu <***> fa
     (<***) :: f a -> f () -> f a
     fa <*** fu = invmap (\(a, ()) -> a) (\a -> (a, ())) $ fa <***> fu
-
-pProductLeft :: Productish f => f a -> f a -> f a
-pProductLeft fa fb = invmap fst (\a -> (a, a)) $ fa <***> fb
 
 instance Productish Endo where
     pUnit = Endo id

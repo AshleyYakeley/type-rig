@@ -4,5 +4,5 @@ packages:
 - .
 
 extra-deps:
-- git: https://github.com/AshleyYakeley/invariant-functors.git
-  commit: 1c84bd5fbd320fb62b996710be58a458aec88d0b
+- git: https://github.com/nfrisby/invariant-functors.git
+  commit: ffe96dfa02cec4d40b54bfc30988656ea86257ed

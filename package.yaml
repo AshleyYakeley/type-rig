@@ -71,7 +71,7 @@ library:
   source-dirs: lib
   dependencies:
     - base >= 4.15 && < 5
-    - invariant >= 0.5
+    - invariant >= 0.6
   exposed-modules:
     - Data.TypeRig.Invariant
     - Data.TypeRig.Summish

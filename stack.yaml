@@ -1,8 +1,7 @@
-resolver: lts-19.5
+resolver: lts-19.14
 
 packages:
 - .
 
 extra-deps:
-- git: https://github.com/nfrisby/invariant-functors.git
-  commit: ffe96dfa02cec4d40b54bfc30988656ea86257ed
+- invariant-0.6

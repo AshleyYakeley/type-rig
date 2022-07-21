@@ -3,9 +3,9 @@ module Data.TypeRig.Productish where
 import Control.Applicative
 import Control.Arrow
 import Control.Category
+import Data.Functor.Invariant
 import Data.Kind
 import Data.Semigroup
-import Data.TypeRig.Invariant
 import Prelude hiding ((.), id)
 import qualified Text.ParserCombinators.ReadPrec as ReadPrec
 

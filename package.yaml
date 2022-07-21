@@ -73,7 +73,6 @@ library:
     - base >= 4.15 && < 5
     - invariant >= 0.6
   exposed-modules:
-    - Data.TypeRig.Invariant
     - Data.TypeRig.Summish
     - Data.TypeRig.Productish
     - Data.TypeRig.Riggish

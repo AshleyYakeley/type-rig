@@ -5,9 +5,9 @@ import Control.Arrow
 import Control.Category
 import Data.Either
 import Data.Functor
+import Data.Functor.Invariant
 import Data.Kind
 import Data.Semigroup
-import Data.TypeRig.Invariant
 import Data.Void
 import Prelude hiding ((.), id)
 import qualified Text.ParserCombinators.ReadPrec as ReadPrec

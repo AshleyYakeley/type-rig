@@ -1,4 +1,4 @@
-module Data.TypeRig.Riggish where
+module Data.TypeRig.Riggable where
 
 import Control.Arrow
 import Data.Either
@@ -8,14 +8,14 @@ import Data.Kind
 import Data.List.NonEmpty
 import Data.Maybe
 import Data.Semigroup
-import Data.TypeRig.Productish
-import Data.TypeRig.Summish
+import Data.TypeRig.Productable
+import Data.TypeRig.Summable
 import Prelude hiding ((.), id)
 import qualified Text.ParserCombinators.ReadP as ReadP
 import qualified Text.ParserCombinators.ReadPrec as ReadPrec
 
-type Riggish :: (Type -> Type) -> Constraint
-class (Productish f, Summish f) => Riggish f where
+type Riggable :: (Type -> Type) -> Constraint
+class (Productable f, Summable f) => Riggable f where
     pOptional :: forall a. f a -> f (Maybe a)
     pOptional fa = let
         eitherToMaybe :: Either a () -> Maybe a
@@ -42,16 +42,16 @@ class (Productish f, Summish f) => Riggish f where
         listToEither [] = Right ()
         in invmap eitherToList listToEither $ pList1 fa <+++> pUnit
 
-instance Riggish Endo where
+instance Riggable Endo where
     pOptional (Endo f) = Endo $ fmap f
     pList1 (Endo f) = Endo $ fmap f
     pList (Endo f) = Endo $ fmap f
 
-instance Riggish m => Riggish (Kleisli m a) where
+instance Riggable m => Riggable (Kleisli m a) where
     pOptional (Kleisli f) = Kleisli $ \a -> pOptional $ f a
     pList1 (Kleisli f) = Kleisli $ \a -> pList1 $ f a
     pList (Kleisli f) = Kleisli $ \a -> pList $ f a
 
-instance Riggish ReadPrec.ReadPrec where
+instance Riggable ReadPrec.ReadPrec where
     pOptional ra = ReadPrec.readP_to_Prec $ \prec -> ReadP.option Nothing $ fmap Just $ ReadPrec.readPrec_to_P ra prec
     pList ra = ReadPrec.readP_to_Prec $ \prec -> ReadP.many $ ReadPrec.readPrec_to_P ra prec

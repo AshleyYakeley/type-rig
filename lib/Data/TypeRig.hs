@@ -2,6 +2,6 @@ module Data.TypeRig
     ( module I
     ) where
 
-import Data.TypeRig.Productish as I
-import Data.TypeRig.Riggish as I
-import Data.TypeRig.Summish as I
+import Data.TypeRig.Productable as I
+import Data.TypeRig.Riggable as I
+import Data.TypeRig.Summable as I

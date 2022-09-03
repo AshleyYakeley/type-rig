@@ -1,4 +1,4 @@
-module Data.TypeRig.Summish where
+module Data.TypeRig.Summable where
 
 import Control.Applicative
 import Control.Arrow
@@ -14,8 +14,8 @@ import qualified Text.ParserCombinators.ReadPrec as ReadPrec
 
 infixr 2 <+++>
 
-type Summish :: (Type -> Type) -> Constraint
-class Invariant f => Summish f where
+type Summable :: (Type -> Type) -> Constraint
+class Invariant f => Summable f where
     pNone :: f Void
     default pNone :: Alternative f => f Void
     pNone = empty
@@ -23,16 +23,16 @@ class Invariant f => Summish f where
     default (<+++>) :: Alternative f => f a -> f b -> f (Either a b)
     fa <+++> fb = (fmap Left fa) <|> (fmap Right fb)
 
-instance Summish Endo where
+instance Summable Endo where
     pNone = Endo id
     Endo p <+++> Endo q =
         Endo $ \case
             Left a -> Left $ p a
             Right b -> Right $ q b
 
-instance Summish m => Summish (Kleisli m a) where
+instance Summable m => Summable (Kleisli m a) where
     pNone = Kleisli $ \_ -> pNone
     Kleisli p <+++> Kleisli q = Kleisli $ \a -> p a <+++> q a
 
-instance Summish ReadPrec.ReadPrec where
+instance Summable ReadPrec.ReadPrec where
     ra <+++> rb = fmap Left ra ReadPrec.<++ fmap Right rb

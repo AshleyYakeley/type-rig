@@ -1,4 +1,4 @@
-module Data.TypeRig.Productish where
+module Data.TypeRig.Productable where
 
 import Control.Applicative
 import Control.Arrow
@@ -11,8 +11,8 @@ import qualified Text.ParserCombinators.ReadPrec as ReadPrec
 
 infixr 3 <***>, ***>, <***
 
-type Productish :: (Type -> Type) -> Constraint
-class Invariant f => Productish f where
+type Productable :: (Type -> Type) -> Constraint
+class Invariant f => Productable f where
     pUnit :: f ()
     default pUnit :: Applicative f => f ()
     pUnit = pure ()
@@ -24,12 +24,12 @@ class Invariant f => Productish f where
     (<***) :: f a -> f () -> f a
     fa <*** fu = invmap (\(a, ()) -> a) (\a -> (a, ())) $ fa <***> fu
 
-instance Productish Endo where
+instance Productable Endo where
     pUnit = Endo id
     Endo p <***> Endo q = Endo $ \(a, b) -> (p a, q b)
 
-instance Productish m => Productish (Kleisli m a) where
+instance Productable m => Productable (Kleisli m a) where
     pUnit = Kleisli $ \_ -> pUnit
     Kleisli p <***> Kleisli q = Kleisli $ \a -> p a <***> q a
 
-instance Productish ReadPrec.ReadPrec
+instance Productable ReadPrec.ReadPrec

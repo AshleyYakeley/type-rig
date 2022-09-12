@@ -14,7 +14,7 @@ import qualified Text.ParserCombinators.ReadPrec as ReadPrec
 
 infixr 2 <+++>
 
--- | Composability via type sum 'Either' and empty 'Void'.
+-- | Composability via type sum 'Either' and empty type 'Void'.
 type Summable :: (Type -> Type) -> Constraint
 class Invariant f => Summable f where
     rVoid :: f Void

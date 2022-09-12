@@ -14,7 +14,7 @@ import Prelude hiding ((.), id)
 import qualified Text.ParserCombinators.ReadP as ReadP
 import qualified Text.ParserCombinators.ReadPrec as ReadPrec
 
--- | Composability via type [rig](https://ncatlab.org/nlab/show/rig).
+-- | Composability via a [rig](https://ncatlab.org/nlab/show/rig) of types.
 type Riggable :: (Type -> Type) -> Constraint
 class (Productable f, Summable f) => Riggable f where
     rOptional :: forall a. f a -> f (Maybe a)

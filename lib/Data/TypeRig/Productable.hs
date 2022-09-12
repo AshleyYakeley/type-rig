@@ -11,7 +11,7 @@ import qualified Text.ParserCombinators.ReadPrec as ReadPrec
 
 infixr 3 <***>, ***>, <***
 
--- | Composability via type product '(,)' and unit '()'.
+-- | Composability via type product '(,)' and unit type '()'.
 type Productable :: (Type -> Type) -> Constraint
 class Invariant f => Productable f where
     rUnit :: f ()

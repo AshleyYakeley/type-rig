@@ -8,11 +8,12 @@ import Data.Kind
 import Data.List.NonEmpty
 import Data.Maybe
 import Data.Semigroup
+import Text.ParserCombinators.ReadP qualified as ReadP
+import Text.ParserCombinators.ReadPrec qualified as ReadPrec
+import Prelude hiding (id, (.))
+
 import Data.TypeRig.Productable
 import Data.TypeRig.Summable
-import Prelude hiding ((.), id)
-import qualified Text.ParserCombinators.ReadP as ReadP
-import qualified Text.ParserCombinators.ReadPrec as ReadPrec
 
 -- | Composability via a [rig](https://ncatlab.org/nlab/show/rig) of types.
 type Riggable :: (Type -> Type) -> Constraint
@@ -39,7 +40,7 @@ class (Productable f, Summable f) => Riggable f where
         eitherToList (Left (a :| aa)) = a : aa
         eitherToList (Right ()) = []
         listToEither :: [a] -> Either (NonEmpty a) ()
-        listToEither (a:aa) = Left $ a :| aa
+        listToEither (a : aa) = Left $ a :| aa
         listToEither [] = Right ()
         in invmap eitherToList listToEither $ rList1 fa <+++> rUnit
 

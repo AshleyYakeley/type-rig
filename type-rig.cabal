@@ -1,0 +1,62 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.38.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           type-rig
+version:        0.2
+synopsis:       Classes for the rig (sums and products) of types
+category:       Data
+homepage:       https://github.com/AshleyYakeley/type-rig#readme
+bug-reports:    https://github.com/AshleyYakeley/type-rig/issues
+author:         Ashley Yakeley
+maintainer:     <ashley@semantic.org>
+copyright:      (c) 2022 Ashley Yakeley
+license:        BSD-2-Clause
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    changeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/AshleyYakeley/type-rig
+
+library
+  exposed-modules:
+      Data.TypeRig.Summable
+      Data.TypeRig.Productable
+      Data.TypeRig.Riggable
+      Data.TypeRig
+  other-modules:
+      Import
+  hs-source-dirs:
+      lib
+  default-extensions:
+      AllowAmbiguousTypes
+      Arrows
+      DefaultSignatures
+      FunctionalDependencies
+      ImplicitParams
+      NoImplicitPrelude
+      OverloadedLabels
+      OverloadedStrings
+      PartialTypeSignatures
+      PatternSynonyms
+      QuantifiedConstraints
+      RecordWildCards
+      RecursiveDo
+      NoStarIsType
+      TemplateHaskell
+      TypeAbstractions
+      TypeFamilies
+      TypeFamilyDependencies
+      UndecidableInstances
+      UndecidableSuperClasses
+      ViewPatterns
+  ghc-options: -Weverything -Wno-missing-import-lists -Wno-missing-export-lists -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-missing-kind-signatures -Wno-partial-type-signatures -Wno-missing-role-annotations -Wno-monomorphism-restriction -Wno-missing-local-signatures -Wno-partial-fields -Wno-all-missed-specialisations -Wno-missed-specialisations
+  build-depends:
+      base >=4.15 && <5
+    , invariant >=0.6
+  default-language: GHC2024

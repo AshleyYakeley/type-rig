@@ -9,8 +9,8 @@ import Data.Functor.Invariant
 import Data.Kind
 import Data.Semigroup
 import Data.Void
-import Prelude hiding ((.), id)
-import qualified Text.ParserCombinators.ReadPrec as ReadPrec
+import Text.ParserCombinators.ReadPrec qualified as ReadPrec
+import Prelude hiding (id, (.))
 
 infixr 2 <+++>
 

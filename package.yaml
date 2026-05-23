@@ -1,5 +1,5 @@
 name: type-rig
-version: 0.1
+version: 0.2
 author: "Ashley Yakeley"
 copyright: "(c) 2022 Ashley Yakeley"
 license: BSD-2-Clause
@@ -13,59 +13,43 @@ build-type: Simple
 extra-source-files:
   - changeLog.md
 
+language: GHC2024
 default-extensions:
   - AllowAmbiguousTypes
   - Arrows
-  - ConstraintKinds
-  - DataKinds
   - DefaultSignatures
-  - EmptyCase
-  - EmptyDataDecls
-  - ExistentialQuantification
-  - FlexibleContexts
-  - FlexibleInstances
-  - ForeignFunctionInterface
   - FunctionalDependencies
-  - GADTs
-  - GeneralizedNewtypeDeriving
   - ImplicitParams
   - NoImplicitPrelude
-  - InstanceSigs
-  - KindSignatures
-  - LambdaCase
-  - MultiParamTypeClasses
   - OverloadedLabels
   - OverloadedStrings
   - PartialTypeSignatures
-  - PatternGuards
   - PatternSynonyms
-  - PolyKinds
   - QuantifiedConstraints
-  - RankNTypes
   - RecordWildCards
   - RecursiveDo
-  - RoleAnnotations
-  - ScopedTypeVariables
-  - StandaloneDeriving
-  - StandaloneKindSignatures
   - NoStarIsType
   - TemplateHaskell
-  - TypeApplications
+  - TypeAbstractions
   - TypeFamilies
   - TypeFamilyDependencies
-  - TypeInType
-  - TypeOperators
-  - TypeSynonymInstances
   - UndecidableInstances
   - UndecidableSuperClasses
   - ViewPatterns
 ghc-options:
-  - -Wall
-  - -Wincomplete-uni-patterns
-  - -Wincomplete-record-updates
-  - -Wcompat
-  - -Wnoncanonical-monad-instances
+  - -Weverything
+  - -Wno-missing-import-lists
+  - -Wno-missing-export-lists
+  - -Wno-unsafe
+  - -Wno-missing-safe-haskell-mode
+  - -Wno-missing-kind-signatures
   - -Wno-partial-type-signatures
+  - -Wno-missing-role-annotations
+  - -Wno-monomorphism-restriction
+  - -Wno-missing-local-signatures
+  - -Wno-partial-fields
+  - -Wno-all-missed-specialisations # non-breaking
+  - -Wno-missed-specialisations # non-breaking
 
 library:
   source-dirs: lib
@@ -77,4 +61,5 @@ library:
     - Data.TypeRig.Productable
     - Data.TypeRig.Riggable
     - Data.TypeRig
-  other-modules: []
+  other-modules:
+    - Import

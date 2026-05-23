@@ -1,19 +1,11 @@
 module Data.TypeRig.Riggable where
 
-import Control.Arrow
-import Data.Either
-import Data.Functor
-import Data.Functor.Invariant
-import Data.Kind
-import Data.List.NonEmpty
-import Data.Maybe
-import Data.Semigroup
 import Text.ParserCombinators.ReadP qualified as ReadP
 import Text.ParserCombinators.ReadPrec qualified as ReadPrec
-import Prelude hiding (id, (.))
 
 import Data.TypeRig.Productable
 import Data.TypeRig.Summable
+import Import
 
 -- | Composability via a [rig](https://ncatlab.org/nlab/show/rig) of types.
 type Riggable :: (Type -> Type) -> Constraint
@@ -43,6 +35,20 @@ class (Productable f, Summable f) => Riggable f where
         listToEither (a : aa) = Left $ a :| aa
         listToEither [] = Right ()
         in invmap eitherToList listToEither $ rList1 fa <+++> rUnit
+
+instance Riggable (Const ()) where
+    rOptional (Const ()) = Const ()
+    rList1 (Const ()) = Const ()
+    rList (Const ()) = Const ()
+
+instance (Invariant f, Alternative f) => Riggable (Ap f) where
+    rOptional (Ap f) = Ap $ fmap Just f <|> pure Nothing
+    rList1 fa@(Ap f) = let
+        Ap lf = rList fa
+        in Ap $ liftA2 (:|) f lf
+    rList fa = let
+        Ap nf = rList1 fa
+        in Ap $ fmap toList nf <|> pure []
 
 instance Riggable Endo where
     rOptional (Endo f) = Endo $ fmap f

@@ -1,13 +1,8 @@
 module Data.TypeRig.Productable where
 
-import Control.Applicative
-import Control.Arrow
-import Control.Category
-import Data.Functor.Invariant
-import Data.Kind
-import Data.Semigroup
 import Text.ParserCombinators.ReadPrec qualified as ReadPrec
-import Prelude hiding (id, (.))
+
+import Import
 
 infixr 3 <***>, ***>, <***
 
@@ -24,6 +19,10 @@ class Invariant f => Productable f where
     fu ***> fa = invmap (\((), a) -> a) (\a -> ((), a)) $ fu <***> fa
     (<***) :: f a -> f () -> f a
     fa <*** fu = invmap (\(a, ()) -> a) (\a -> (a, ())) $ fa <***> fu
+
+instance Monoid a => Productable (Const a)
+
+instance (Invariant f, Applicative f) => Productable (Ap f)
 
 instance Productable Endo where
     rUnit = Endo id

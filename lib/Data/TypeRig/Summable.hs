@@ -1,16 +1,8 @@
 module Data.TypeRig.Summable where
 
-import Control.Applicative
-import Control.Arrow
-import Control.Category
-import Data.Either
-import Data.Functor
-import Data.Functor.Invariant
-import Data.Kind
-import Data.Semigroup
-import Data.Void
 import Text.ParserCombinators.ReadPrec qualified as ReadPrec
-import Prelude hiding (id, (.))
+
+import Import
 
 infixr 2 <+++>
 
@@ -23,6 +15,12 @@ class Invariant f => Summable f where
     (<+++>) :: f a -> f b -> f (Either a b)
     default (<+++>) :: Alternative f => f a -> f b -> f (Either a b)
     fa <+++> fb = (fmap Left fa) <|> (fmap Right fb)
+
+instance Summable (Const ()) where
+    rVoid = Const ()
+    Const () <+++> Const () = Const ()
+
+instance (Invariant f, Alternative f) => Summable (Ap f)
 
 instance Summable Endo where
     rVoid = Endo id

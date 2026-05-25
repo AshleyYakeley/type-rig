@@ -22,6 +22,16 @@ class Invariant f => Productable f where
 
 instance Monoid a => Productable (Const a)
 
+instance Productable Equivalence where
+    rUnit = Equivalence $ \_ _ -> True
+    Equivalence oa <***> Equivalence ob = Equivalence $ \(pa, pb) (qa, qb) -> oa pa qa && ob pb qb
+
+instance Monoid t => Productable (Op t) where
+    rUnit = Op $ \() -> mempty
+    Op ap <***> Op bp = Op $ \(a, b) -> ap a <> bp b
+    Op ap ***> Op bp = Op $ \b -> ap () <> bp b
+    Op ap <*** Op bp = Op $ \a -> ap a <> bp ()
+
 instance (Invariant f, Applicative f) => Productable (Ap f)
 
 instance Productable Endo where

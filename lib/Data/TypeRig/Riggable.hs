@@ -41,6 +41,21 @@ instance Riggable (Const ()) where
     rList1 (Const ()) = Const ()
     rList (Const ()) = Const ()
 
+instance Monoid t => Riggable (Op t) where
+    rOptional (Op p) = let
+        mp = \case
+            Just a -> p a
+            Nothing -> mempty
+        in Op mp
+    rList1 fa@(Op p) = Op $ let
+        Op lp = rList fa
+        in \(a :| aa) -> p a <> lp aa
+    rList fa = Op $ let
+        Op np = rList1 fa
+        in \case
+            a : aa -> np $ a :| aa
+            [] -> mempty
+
 instance (Invariant f, Alternative f) => Riggable (Ap f) where
     rOptional (Ap f) = Ap $ fmap Just f <|> pure Nothing
     rList1 fa@(Ap f) = let

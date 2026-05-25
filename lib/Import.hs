@@ -5,6 +5,7 @@ import Control.Applicative as I
 import Control.Arrow as I
 import Control.Category as I
 import Data.Foldable as I
+import Data.Functor.Contravariant as I
 import Data.Functor.Invariant as I
 import Data.Kind as I
 import Data.List.NonEmpty as I (NonEmpty (..))

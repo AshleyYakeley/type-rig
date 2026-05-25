@@ -20,6 +20,20 @@ instance Summable (Const ()) where
     rVoid = Const ()
     Const () <+++> Const () = Const ()
 
+instance Summable Equivalence where
+    rVoid = Equivalence $ \p -> absurd p
+    Equivalence a <+++> Equivalence b = let
+        ab (Left p) (Left q) = a p q
+        ab (Right p) (Right q) = b p q
+        ab _ _ = False
+        in Equivalence ab
+
+instance Summable (Op t) where
+    rVoid = Op absurd
+    Op ap <+++> Op bp = Op $ \case
+        Left a -> ap a
+        Right b -> bp b
+
 instance (Invariant f, Alternative f) => Summable (Ap f)
 
 instance Summable Endo where
